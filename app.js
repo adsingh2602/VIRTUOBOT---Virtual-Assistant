@@ -75,11 +75,24 @@ function takeCommand(message) {
         const date = new Date().toLocaleString(undefined, { month: "short", day: "numeric" });
         const finalText = "Today's date is " + date;
         speak(finalText);
-    } else if (message.includes('calculator')) {
+    }else if (message.includes("play rajat dalal favourite song")) {
+        window.open("https://www.youtube.com/shorts/HKShmuTT-Y4", "_blank");
+        speak("playing rajat dalal favourite song...");
+    }  
+    else if (message.includes('calculator')) {
         window.open('Calculator:///');
         const finalText = "Opening Calculator";
         speak(finalText);
-    } else {
+    }
+    else if (message.includes('play')) {
+        // Add code here to search for music on YouTube and play it automatically
+        const musicQuery = message.replace('play music', '').trim();
+        const musicUrl = `https://www.youtube.com/results?search_query=${musicQuery}`;
+        window.open(musicUrl, "_blank");
+        const finalText = "Playing music: " + musicQuery;
+        
+    }
+        else {
         window.open(`https://www.google.com/search?q=${message.replace(" ", "+")}`, "_blank");
         const finalText = "I found some information for " + message + " on Google";
         speak(finalText);
