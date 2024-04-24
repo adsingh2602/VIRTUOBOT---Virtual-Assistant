@@ -1,9 +1,10 @@
 const btn = document.querySelector('.talk');
 const content = document.querySelector('.content');
 
-function speak(text) {
+function speak(text, lang = 'hi-IN') {
     const text_speak = new SpeechSynthesisUtterance(text);
 
+    text_speak.lang = lang;
     text_speak.rate = 1;
     text_speak.volume = 1;
     text_speak.pitch = 1;
@@ -17,6 +18,10 @@ function wishMe() {
 
     if (hour >= 0 && hour < 12) {
         speak("Good Morning Boss...");
+        // speak("जय श्री राम");
+        // speak("Good morning चोधरी साहब");
+        // speak("सुप्रभात चोधरी साहब");
+        
     } else if (hour >= 12 && hour < 17) {
         speak("Good Afternoon Master...");
     } else {
@@ -28,6 +33,7 @@ window.addEventListener('load', () => {
     speak("Initializing Virtuobot...");
     wishMe();
 });
+
 
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const recognition = new SpeechRecognition();
@@ -84,6 +90,11 @@ function takeCommand(message) {
         const finalText = "Opening Calculator";
         speak(finalText);
     }
+
+    else if (message.includes('ram ram') || message.includes('hello')) {
+        speak("ram ram bhai saara ne");
+    }      
+    
     else if (message.includes('play')) {
         // Add code here to search for music on YouTube and play it automatically
         const musicQuery = message.replace('play music', '').trim();
